@@ -2,6 +2,12 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-
+    {% for listing in listings %}
+        <li>{{ listing.id }}</li>
+        <a href="{% url 'auctions:listing' listing.id %}"><img src="{{ listing.image.url }}" height=40 width=40></a>
+        <li>{{ listing.title }}</li>
+        <li>{{ listing.owner }}</li>
+        <li>...Posted at {{ listing.listing_date }}</li>
+    {% endfor %}
     TODO
 {% endblock %}

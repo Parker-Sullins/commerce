@@ -11,7 +11,7 @@ class Listing(models.Model):
     owner = models.CharField(max_length=30, default='Owner')
     title = models.CharField(max_length=60, default='Title')
     description = models.TextField(default='Description')
-    image = models.ImageField(upload_to='media/auctions/images/', default='media/auctions/images/default.png')
+    image = models.ImageField(upload_to='auctions/images/', default='auctions/images/default.png')
     price = models.IntegerField(default=0)
     category = models.CharField(max_length=45, default='Category')
     listing_date = models.DateField("Date", default=datetime.date.today)
