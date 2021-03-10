@@ -1,5 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Watch List for {{ username }}</h2>
+    {% for item in watch_list_items %}
+    <h2>Watch List for {{ item }}</h2>
+    {% endfor %}
 {% endblock %}

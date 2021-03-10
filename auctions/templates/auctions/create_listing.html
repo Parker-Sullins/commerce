@@ -2,4 +2,15 @@
 
 {% block body %}
     <h2>Create Listings</h2>
+    <form action="{% url 'auctions:create_listing' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" value="Submit">Submit</button>
+    </form>
+    <br>
+    <br>
+    {% if error %}
+        <h1>Error In Form.</h1>
+        <h3>{{ error }}</h3>
+    {% endif %}
 {% endblock %}

@@ -2,6 +2,56 @@
 
 {% block body %}
     <h2>Current Listings</h2>
-    {{ item.id }}
-    {{ item.title }}
+    <ul>
+        <a><img src="{{ listings.image.url }}" height=40 width=40></a>
+        <li>{{ listings.title }}</li>
+        <li>{{ listings.author }}</li>
+        <li>{{ listings.listing_date }}</li>
+        {% if listings.active_listing %}
+            <li>This Listing is Active</li>
+        {% else %}
+            <li>This Listing is Closed</li>
+        {% endif %}
+        <li>{{ listings.price }}</li>
+    </ul>
+
+    <form action="{% url 'auctions:add_watch_list' listings.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Add To Watch List</button>
+    </form>
+    <form action="{% url 'auctions:add_comment' listings.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Add a Comment</button>
+    </form>
+    <form action="{% url 'auctions:place_bid' listings.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Place a Bid</button>
+    </form>
+    {% if close_ls_button %}
+        <form action="{% url 'auctions:close_listing' listings.id %}">
+            <button type="submit">Close Listing</button>
+        </form>
+    {% endif %}
+    {{ list }}
+    <br>
+    <br>
+    <br>
+    {% for comment in comments %}
+        <li>{{ comment.comment_content }}</li>
+        <li>{{ comment.comment_author }}</li>
+        <li>{{ comment.id }}</li>
+        <li>{{ comment.comment_date }}</li>
+        <br>
+        <br>
+    {% endfor %}
+    {% if bids %}
+        <li>Current Top Bid: {{ bids.bid_author }}</li>
+        <li>${{ bids.bid_price }}</li>
+        <li>{{ bids.bid_date }}</li>
+        <li>{{ bids.id }}</li>
+        <br>
+        <br>
+    {% else %}
+        <h5>There are no Bids on this listing.</h5>
+    {% endif %}
 {% endblock %}

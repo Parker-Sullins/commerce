@@ -2,4 +2,12 @@
 
 {% block body %}
     <h2>Current Bids for {{ username }}</h2>
+    <h2>
+    {{ current_bids }}
+    {% for bid in current_bids %}
+        <li>{{ bid.listing }}</li>
+        <a><img src="{{ bid.listing.image.url }}"></a>
+        <li>{{ bid.bid_price }}</li>
+    {% endfor %}
+    </h2>
 {% endblock %}

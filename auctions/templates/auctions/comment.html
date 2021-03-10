@@ -1,0 +1,26 @@
+{% extends "auctions/listing.html" %}
+
+{% block body %}
+    <h2>Current Listings</h2>
+    <ul>
+        <li>{{ listings.id }}</li>
+        <li>{{ listings.title }}</li>
+        <li>{{ listings.author }}</li>
+        <li>{{ listings.listing_date }}</li>
+        {% if listings.active_listing %}
+            <li>This Listing is Active</li>
+        {% else %}
+            <li>This Listing is Closed</li>
+        {% endif %}
+        <li>{{ listings.price }}</li>
+    </ul>
+    <form action="{% url 'auctions:add_watch_list' listings.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Add To Watch List</button>
+    </form>
+    <form action="{% url 'auctions:comment' listings.id %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
